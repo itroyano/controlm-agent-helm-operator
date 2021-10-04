@@ -1,0 +1,6 @@
+apiVersion: v2
+appVersion: 0.0.1
+description: A BMC Control-M Agent Helm chart for Kubernetes
+name: control-m-agent
+type: application
+version: 0.0.1

@@ -1,0 +1,23 @@
+apiVersion: controlm.bmc.com/v1alpha1
+kind: Agent
+metadata:
+  name: agent-sample
+spec:
+  # Default values copied from <project_dir>/helm-charts/control-m-agent/values.yaml
+  controlM:
+    agent:
+      agport: "7006"
+      image: quay.io/itroyano/controlmagent:0.0.6
+      pullPolicy: IfNotPresent
+      replicas: 1
+    api:
+      endpoint: https://54.93.91.53:8446/automation-api
+      pass: empass
+      user: emuser
+    serverName: ip-172-31-6-159
+    volumePath: /home/controlm/persistent_folder
+  pvc:
+    accessMode: ReadWriteOnce
+    volumeSize: 10Gi
+  
+  
