@@ -50,7 +50,19 @@ Run ```make undeploy ``` to remove the CRD and the Operator.
 
 ## Bundle and OperatorHub integration
 
-To be implemented soon.
+The Operator can be installed to a cluster with OLM integration,  using the following command -
+```operator-sdk run bundle quay.io/itroyano/controlmagent-helm-bundle:0.0.1```
+
+### How was this created?
+Check the makefile for the following targets
+
+```make bundle```
+
+And then
+
+```make bundle-build```
+
+```make bundle-push ```
 
 ## Next Steps
 

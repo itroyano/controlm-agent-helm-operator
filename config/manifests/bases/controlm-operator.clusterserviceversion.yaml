@@ -1,0 +1,43 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: '[]'
+    capabilities: Basic Install
+  name: controlm-operator.v0.0.0
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions: {}
+  description: BMC Control-M Agent Helm Operator
+  displayName: Control-M Agent Helm Operator
+  icon:
+  - base64data: ""
+    mediatype: ""
+  install:
+    spec:
+      deployments: null
+    strategy: ""
+  installModes:
+  - supported: false
+    type: OwnNamespace
+  - supported: false
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - controlm
+  - agent
+  links:
+  - name: Controlm Operator
+    url: https://controlm-operator.domain
+  maintainers:
+  - email: itroyano@redhat.com
+    name: Igor
+  maturity: alpha
+  provider:
+    name: bmc.com
+    url: bmc.com
+  version: 0.0.0
