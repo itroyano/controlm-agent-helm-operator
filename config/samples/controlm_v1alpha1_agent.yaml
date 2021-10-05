@@ -4,6 +4,7 @@ metadata:
   name: agent-sample
 spec:
   # Default values copied from <project_dir>/helm-charts/control-m-agent/values.yaml
+  runOnOpenShift: true
   controlM:
     agent:
       agport: "7006"

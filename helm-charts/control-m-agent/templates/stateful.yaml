@@ -51,10 +51,10 @@ spec:
     #      imagePullSecrets:
     #      - name: regcred
     #     See example_RBC.yaml for sample RBC Configuration
-    #     serviceAccountName: statefulset-agent
-    #      securityContext:
-             # the agent account gid so it will be able to access the PV
-    #          fsGroup: 1000
+          serviceAccountName: statefulset-agent
+          securityContext:
+            # the agent account gid so it will be able to access the PV
+            fsGroup: 1000
           volumes:
             - name: pv-data
               persistentVolumeClaim:

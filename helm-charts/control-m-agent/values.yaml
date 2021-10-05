@@ -1,7 +1,7 @@
 # Default values for control-m-agent.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-
+runOnOpenShift: true
 pvc:
   volumeSize: 10Gi
   accessMode: ReadWriteOnce
