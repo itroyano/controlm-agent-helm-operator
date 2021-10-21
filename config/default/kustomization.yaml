@@ -15,6 +15,7 @@ namePrefix: controlm-operator-
 bases:
 - ../crd
 - ../rbac
+- ../samples
 - ../manager
 # [PROMETHEUS] To enable prometheus monitor, uncomment all sections with 'PROMETHEUS'.
 #- ../prometheus
