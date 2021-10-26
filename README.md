@@ -1,4 +1,4 @@
-# Control-M Agent Helm Operator
+# Control-M Agent Helm Operator (Draft)
 
 ## What is a Helm Operator?
 
@@ -16,9 +16,6 @@ bundle --> Operator Bundle resources
 config --> SDK-generated configurations.  also contains a running Custom Resource for testing, under /samples.
 helm-charts --> the up to date chart.  This is newer than the one inside the "automation community" repo. contains a fix for SCC on Openshift.  
 ```
-
-### Goal: Each component to be built and delivered oficially by CI, and pass Certification.
-
 
 ## How this was built
 
@@ -43,6 +40,31 @@ Next, verified to match the roles and permissions under ```config/rbac/role.yaml
 
 Since the chart creates a role, a statefulset, a pvc and a secret - all are required to be given as permissions to the roles of the Operator.
 
+## Building Images
+
+### The ControlM Agent Image (Application)
+
+```
+cd agent-docker-manifests
+docker build \
+       --build-arg AAPI_END_POINT=<API ENDPOINT>/automation-api \
+       --build-arg AAPI_USER=<CTRLM_USER> \
+       --build-arg AAPI_PASS=<CTRLM_PASS> \
+       --build-arg AGENT_IMAGE_NAME=Agent_Image.Linux \
+       --build-arg SUB_USER=<RH_SUBSCRIPTION_USER> \ 
+       --build-arg SUB_PWD=<RH_SUBSCRIPTION_PASS> \
+       . -t <bmc-repository>/controlmagent:<tag>
+cd ..
+```
+
+### The Helm Operator Image
+
+Inspect `IMG` inside `Makefile` and then run `make docker-build && make docker-push`
+
+### The Bundle Image
+
+See `Bundle and OperatorHub integration` below
+
 ## Executing installation for a local test 
 
 Deploy the Operator's Controller Manager ```make deploy ```
@@ -55,14 +77,20 @@ The Controller Manager will reconcile installation of the Helm Chart, and create
 
 ## Cleaning up
 
-Remove the installed agent by ```kubectl delete -f config/samples/controlm_v1alpha1_agent.yaml ```
+Remove the installed agent by ```oc delete -f config/samples/controlm_v1alpha1_agent.yaml ```
 
 Run ```make undeploy ``` to remove the CRD and the Operator.
 
 ## Bundle and OperatorHub integration
 
 The Operator can be installed to a cluster with OLM integration,  using the following command -
-```operator-sdk run bundle quay.io/itroyano/controlmagent-helm-bundle:0.0.1```
+```operator-sdk run bundle quay.io/itroyano/controlmagent-helm-bundle:0.0.2```
+
+and then 
+
+```oc apply -f ``` the example CR ```config/samples/controlm_v1alpha1_agent.yaml ```
+
+The Controller Manager will reconcile installation of the Helm Chart, and create/update Agents.
 
 ### How was this created?
 Check the makefile for the following targets
