@@ -8,6 +8,17 @@ In our case we will create an Operator that installs the new Helm Chart of BMC C
 For more information please refer to
  https://sdk.operatorframework.io/docs/building-operators/helm/tutorial/
 
+## Folder description
+
+```
+agent-docker-manifests --> container manifests (dockerfile and entrypoint) used to build the UBI-based Agent.
+bundle --> Operator Bundle resources
+config --> SDK-generated configurations.  also contains a running Custom Resource for testing, under /samples.
+helm-charts --> the up to date chart.  This is newer than the one inside the "automation community" repo. contains a fix for SCC on Openshift.  
+```
+
+### Goal: Each component to be built and delivered oficially by CI, and pass Certification.
+
 
 ## How this was built
 
