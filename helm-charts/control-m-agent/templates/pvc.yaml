@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: agent-pvc
+  name: "{{ .Release.Name }}-agent-pvc"
 spec:
   accessModes:
     - {{ .Values.pvc.accessMode }}

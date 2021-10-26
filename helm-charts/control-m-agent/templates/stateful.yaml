@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: statefulset-agent
+  name: "{{ .Release.Name }}-statefulset-agent"
   labels:
         type: stateful-service-ctmag-srv
 spec:
-    serviceName: ctmag
+    serviceName: "{{ .Release.Name }}-ctmag"
     selector:
         matchLabels:
             type: stateful-service-ctmag-srv
@@ -33,12 +33,12 @@ spec:
             - name: AAPI_USER
               valueFrom:
                 secretKeyRef:
-                  name: controlmusercreds
+                  name: "{{ .Release.Name }}-controlmusercreds"
                   key: AAPI_USER
             - name: AAPI_PASS
               valueFrom:
                 secretKeyRef:
-                  name: controlmusercreds
+                  name: "{{ .Release.Name }}-controlmusercreds"
                   key: AAPI_PASS
             imagePullPolicy: {{ .Values.controlM.agent.pullPolicy }}
             ports:
@@ -51,11 +51,11 @@ spec:
     #      imagePullSecrets:
     #      - name: regcred
     #     See example_RBC.yaml for sample RBC Configuration
-          serviceAccountName: statefulset-agent
+          serviceAccountName: "{{ .Release.Name }}-statefulset-agent"
           securityContext:
             # the agent account gid so it will be able to access the PV
             fsGroup: 1000
           volumes:
             - name: pv-data
               persistentVolumeClaim:
-                claimName: agent-pvc
+                claimName: "{{ .Release.Name }}-agent-pvc"
